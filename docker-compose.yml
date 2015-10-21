@@ -1,0 +1,17 @@
+mapnik:
+        build: osm-mapnik
+        links:
+                - db:postgres-osm
+        ports:
+                - "8081:80"
+mongodb:
+        build: osm-mongodb
+mapproxy:
+        build: osm-mapproxy
+        links:
+                - mapnik:styles-wms
+                - mongodb
+        ports:
+                - "8080:80"
+db:
+        build: osm-db
