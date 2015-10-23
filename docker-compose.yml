@@ -6,6 +6,8 @@ mapnik:
                 - "8081:80"
 mongodb:
         build: osm-mongodb
+        volumes:
+                - /srv/geopicardie/volumes/mongo:/data/db
 mapproxy:
         build: osm-mapproxy
         links:
@@ -15,3 +17,5 @@ mapproxy:
                 - "8080:80"
 db:
         build: osm-db
+        volumes:
+                - /srv/geopicardie/volumes/postgres:/var/lib/postgresql
