@@ -19,3 +19,6 @@ db:
         build: osm-db
         volumes:
                 - /srv/geopicardie/volumes/postgres:/var/lib/postgresql
+                - /srv/geopicardie/volumes/osm-data:/srv/data
+        environment:
+                - OSM_PBF=http://download.geofabrik.de/europe/france-latest.osm.pbf
