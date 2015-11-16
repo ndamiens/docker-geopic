@@ -1,0 +1,3 @@
+mapproxy:
+        environment:
+                - MONGODB_URL=mongodb://admin:passwd@mongodb:27017/

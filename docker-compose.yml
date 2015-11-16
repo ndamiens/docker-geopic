@@ -15,6 +15,9 @@ mapproxy:
                 - mongodb
         ports:
                 - "8080:80"
+        extends:
+                file: docker-compose-local.yml
+                service: mapproxy
 db:
         build: osm-db
         volumes:
