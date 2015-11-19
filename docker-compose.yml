@@ -6,8 +6,12 @@ mapnik:
                 - "8081:80"
 mongodb:
         build: osm-mongodb
+        ports:
+                - "27017:27017"
         volumes:
                 - /srv/geopicardie/volumes/mongo:/data/db
+        environment:
+                - REPL_SET=mongoosm
 mapproxy:
         build: osm-mapproxy
         links:
