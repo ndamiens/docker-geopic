@@ -19,6 +19,10 @@ if [ "$REPL_SET" != "" ]; then
     cmd="$cmd --replSet $REPL_SET"
 fi
 
+if [ -f /data/db/keyfile ]; then
+    cmd="$cmd --keyFile /data/db/keyfile"
+fi
+
 $cmd &
 
 if [ ! -f /data/db/.mongodb_password_set ]; then
