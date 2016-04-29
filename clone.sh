@@ -1,3 +1,3 @@
-git clone https://github.com/ndamiens/docker-geopic-mapnik osm-mapnik
-git clone https://github.com/ndamiens/docker-geopic-postgres-osm osm-db
-git clone https://github.com/ndamiens/docker-mapproxy-cache osm-mapproxy
+git clone https://github.com/geopicardie/docker-geopic-mapnik osm-mapnik
+git clone https://github.com/geopicardie/docker-geopic-postgres-osm osm-db
+git clone https://github.com/geopicardie/docker-mapproxy-cache osm-mapproxy
