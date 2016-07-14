@@ -4,6 +4,10 @@ mapnik:
                 - db:postgres-osm
         ports:
                 - "8081:80"
+        volumes:
+                - /srv/geopicardie/volumes/mapnik/inpn:/srv/inpn
+                - /srv/geopicardie/volumes/mapnik/coastline:/srv/coastline
+                - /srv/geopicardie/volumes/mapnik/osmdata:/srv/osmdata
 mongodb:
         build: osm-mongodb
         ports:
@@ -11,7 +15,8 @@ mongodb:
         volumes:
                 - /srv/geopicardie/volumes/mongo:/data/db
         environment:
-                - REPL_SET=mongoosm
+                - MONGODB_PASS=passwd
+                - SMALL_FILES=1
 mapproxy:
         build: osm-mapproxy
         links:
@@ -19,13 +24,13 @@ mapproxy:
                 - mongodb
         ports:
                 - "8080:80"
-        extends:
-                file: docker-compose-local.yml
-                service: mapproxy
+        environment:
+                - MONGODB_URL=mongodb://admin:passwd@172.17.0.1:27017/
+
 db:
         build: osm-db
         volumes:
                 - /srv/geopicardie/volumes/postgres:/var/lib/postgresql
                 - /srv/geopicardie/volumes/osm-data:/srv/data
         environment:
-                - OSM_PBF=http://download.geofabrik.de/europe/france-latest.osm.pbf
+                - OSM_PBF=http://download.geofabrik.de/europe/france/picardie-latest.osm.pbf
