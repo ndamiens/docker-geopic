@@ -1,0 +1,9 @@
+[submodule "osm-db"]
+	path = osm-db
+	url = git@github.com:geopicardie/docker-geopic-postgres-osm.git
+[submodule "osm-mapnik"]
+	path = osm-mapnik
+	url = git@github.com:geopicardie/docker-geopic-mapnik.git
+[submodule "osm-mapproxy"]
+	path = osm-mapproxy
+	url = git@github.com:geopicardie/docker-mapproxy-cache.git
