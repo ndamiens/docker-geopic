@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+	</head>
+	<body>
+		Exemple Leaflet
+		<div id="mapid"></div>
+		<script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+		<style>
+			#mapid { height: 180px; }
+		</style>
+		<script>
+			function setup() {
+				var attrib = 'Style <a href="http://www.geopicardie.fr/">Géopicardie</a>, données <a href="http://www.openstreetmap.org/">Openstreetmap</a> et ses contributeurs';
+				var mymap = L.map('mapid').setView([49.894293, 2.295736], 10);
+				var layer = L.tileLayer('http://osm.geopicardie.fr/mapproxy/tms/1.0.0/{style}/webmercator/{z}/{x}/{y}.png', {
+					style: 'pure',  // au choix : pure, naturaliste, bright, grey, faded
+					attribution: attrib,
+					zoomOffset: -1,
+					tms: true
+				});
+				mymap.addLayer(layer);
+			}
+			window.onload = setup;
+		</script>
+	</body>
+</html>
