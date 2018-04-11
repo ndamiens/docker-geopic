@@ -6,7 +6,7 @@ ssl:
         ports:
                 - "443:443"
 haproxy:
-        image: osm-haproxy
+        build: osm-haproxy
         environment:
                 - HA_HOST0=188.165.222.227
                 - HA_HOST1=188.165.222.200
@@ -18,7 +18,6 @@ haproxy:
                 - ssl
         volumes:
                 - ./letsencrypt:/usr/local/etc/haproxy/letsencrypt
-                - ./haproxy.cfg.base:/usr/local/etc/haproxy/haproxy.cfg.base
 mapnik:
         build: osm-mapnik
         links:
