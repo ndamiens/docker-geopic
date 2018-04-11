@@ -1,1 +1,4 @@
 docker-compose-local.yaml
+osm-db
+osm-mapnik
+osm-mapproxy
