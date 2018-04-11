@@ -1,9 +1,30 @@
+ssl:
+        build: cert/
+        restart: always
+        volumes:
+                - ./letsencrypt:/etc/letsencrypt
+        ports:
+                - "443:443"
+haproxy:
+        image: osm-haproxy
+        environment:
+                - HA_HOST0=188.165.222.227
+                - HA_HOST1=188.165.222.200
+        command: /usr/local/bin/run
+        ports:
+                - "80:80"
+        restart: always
+        links:
+                - ssl
+        volumes:
+                - ./letsencrypt:/usr/local/etc/haproxy/letsencrypt
+                - ./haproxy.cfg.base:/usr/local/etc/haproxy/haproxy.cfg.base
 mapnik:
         build: osm-mapnik
         links:
                 - db:postgres-osm
         ports:
-                - "8081:80"
+                - "8080:80"
         volumes:
                 - /srv/geopicardie/volumes/mapnik/inpn:/srv/inpn
                 - /srv/geopicardie/volumes/mapnik/coastline:/srv/coastline
@@ -15,15 +36,16 @@ mongodb:
         volumes:
                 - /srv/geopicardie/volumes/mongo:/data/db
         environment:
-                - MONGODB_PASS=passwd
-                - SMALL_FILES=1
+                - JOURNALING=yes
+                - AUTH=yes
+                - REPL_SET=mongoosm
 mapproxy:
         build: osm-mapproxy
         links:
                 - mapnik:styles-wms
                 - mongodb
         ports:
-                - "8080:80"
+                - "8081:80"
         environment:
                 - MONGODB_URL=mongodb://admin:passwd@172.17.0.1:27017/
 
