@@ -54,4 +54,4 @@ db:
                 - /srv/geopicardie/volumes/postgres:/var/lib/postgresql
                 - /srv/geopicardie/volumes/osm-data:/srv/data
         environment:
-                - OSM_PBF=http://download.geofabrik.de/europe/france/picardie-latest.osm.pbf
+                - OSM_PBF=http://download.geofabrik.de/europe-latest.osm.pbf
