@@ -1,6 +1,3 @@
-[submodule "osm-db"]
-	path = osm-db
-	url = git@github.com:geopicardie/docker-geopic-postgres-osm.git
 [submodule "osm-mapnik"]
 	path = osm-mapnik
 	url = git@github.com:geopicardie/docker-geopic-mapnik.git
