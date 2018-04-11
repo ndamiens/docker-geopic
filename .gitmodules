@@ -1,3 +1,0 @@
-[submodule "osm-mapproxy"]
-	path = osm-mapproxy
-	url = git@github.com:geopicardie/docker-mapproxy-cache.git
