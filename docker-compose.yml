@@ -39,7 +39,6 @@ mongodb:
         environment:
                 - JOURNALING=yes
                 - AUTH=yes
-                - REPL_SET=mongoosm
 mapproxy:
         build: osm-mapproxy
         links:
