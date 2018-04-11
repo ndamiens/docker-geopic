@@ -1,4 +1,4 @@
-docker-compose-local.yaml
+docker-compose.override.yml
 osm-db
 osm-mapnik
 osm-mapproxy
