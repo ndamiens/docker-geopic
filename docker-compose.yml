@@ -24,6 +24,7 @@ mapnik:
                 - db:postgres-osm
         ports:
                 - "8080:80"
+        restart: always
         volumes:
                 - /srv/geopicardie/volumes/mapnik/inpn:/srv/inpn
                 - /srv/geopicardie/volumes/mapnik/coastline:/srv/coastline
@@ -32,6 +33,7 @@ mongodb:
         build: osm-mongodb
         ports:
                 - "27017:27017"
+        restart: always
         volumes:
                 - /srv/geopicardie/volumes/mongo:/data/db
         environment:
@@ -43,6 +45,7 @@ mapproxy:
         links:
                 - mapnik:styles-wms
                 - mongodb
+        restart: always
         ports:
                 - "8081:80"
         environment:
@@ -50,6 +53,7 @@ mapproxy:
 
 db:
         build: osm-db
+        restart: always
         volumes:
                 - /srv/geopicardie/volumes/postgres:/var/lib/postgresql
                 - /srv/geopicardie/volumes/osm-data:/srv/data
