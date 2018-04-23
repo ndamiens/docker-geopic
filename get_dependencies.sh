@@ -31,6 +31,6 @@ if [ -d osm-mapproxy/ ]; then
     git checkout $BRANCH_MAPPROXY
     cd ..
 else
-    git clone https://github.com/geopicardie/docker-mapproxy-cache osm-mapproxy -b $BRANCH_MAPPROX
+    git clone https://github.com/geopicardie/docker-mapproxy-cache osm-mapproxy -b $BRANCH_MAPPROXY
 fi
 
