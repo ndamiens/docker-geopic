@@ -1,8 +1,8 @@
 #! /bin/bash
 
 BRANCH_MAPNIK=multi
-BRANCH_DB=update_osm
-BRANCH_MAPPROXY=osm-update
+BRANCH_DB=master
+BRANCH_MAPPROXY=master
 
 echo update osm-mapnik
 if [ -d osm-mapnik/ ]; then
