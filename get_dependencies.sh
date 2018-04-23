@@ -1,6 +1,6 @@
 #! /bin/bash
 
-BRANCH_MAPNIK=master
+BRANCH_MAPNIK=multi
 BRANCH_DB=update_osm
 BRANCH_MAPPROXY=osm-update
 
