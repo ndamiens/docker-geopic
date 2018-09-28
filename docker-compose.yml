@@ -1,31 +1,59 @@
-mapnik:
-        build: osm-mapnik
-        links:
-                - db:postgres-osm
-        ports:
-                - "8081:80"
-mongodb:
-        build: osm-mongodb
-        ports:
-                - "27017:27017"
-        volumes:
-                - /srv/geopicardie/volumes/mongo:/data/db
-        environment:
-                - REPL_SET=mongoosm
-mapproxy:
-        build: osm-mapproxy
-        links:
-                - mapnik:styles-wms
-                - mongodb
-        ports:
-                - "8080:80"
-        extends:
-                file: docker-compose-local.yml
-                service: mapproxy
-db:
-        build: osm-db
-        volumes:
-                - /srv/geopicardie/volumes/postgres:/var/lib/postgresql
-                - /srv/geopicardie/volumes/osm-data:/srv/data
-        environment:
-                - OSM_PBF=http://download.geofabrik.de/europe/france-latest.osm.pbf
+version: "2"
+services:
+        ssl:
+                build: cert/
+                restart: always
+                volumes:
+                        - ./letsencrypt:/etc/letsencrypt
+                ports:
+                        - "443:443"
+        haproxy:
+                build: osm-haproxy
+                environment:
+                        - HA_HOST0=188.165.222.200
+                        - HA_HOST1=188.165.222.227
+                command: /usr/local/bin/run
+                ports:
+                        - "80:80"
+                restart: always
+                links:
+                        - ssl
+                volumes:
+                        - ./letsencrypt:/usr/local/etc/haproxy/letsencrypt
+        mapnik:
+                build: osm-mapnik
+                links:
+                        - db:postgres-osm
+                ports:
+                        - "8080:80"
+                restart: always
+                volumes:
+                        - /srv/geopicardie/volumes/mapnik/inpn:/srv/inpn
+                        - /srv/geopicardie/volumes/mapnik/coastline:/srv/coastline
+                        - /srv/geopicardie/volumes/mapnik/osmdata:/srv/osmdata
+        mongodb:
+                build: osm-mongodb
+                ports:
+                        - "27017:27017"
+                restart: always
+                volumes:
+                        - /srv/geopicardie/volumes/mongo:/data/db
+                environment:
+                        - JOURNALING=yes
+                        - AUTH=yes
+        mapproxy:
+                build: osm-mapproxy
+                links:
+                        - mapnik:styles-wms
+                        - mongodb
+                ports:
+                        - "8081:80"
+
+        db:
+                build: osm-db
+                restart: always
+                volumes:
+                        - /srv/geopicardie/volumes/postgres:/var/lib/postgresql
+                        - /srv/geopicardie/volumes/osm-data:/srv/data
+                environment:
+                        - OSM_PBF=http://download.geofabrik.de/europe-latest.osm.pbf

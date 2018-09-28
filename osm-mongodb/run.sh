@@ -23,6 +23,10 @@ if [ -f /data/db/keyfile ]; then
     cmd="$cmd --keyFile /data/db/keyfile"
 fi
 
+if [ "$SMALL_FILES" != "" ]; then
+    cmd="$cmd --smallfiles"
+fi
+
 $cmd &
 
 if [ ! -f /data/db/.mongodb_password_set ]; then
